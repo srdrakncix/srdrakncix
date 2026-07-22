@@ -42,6 +42,8 @@ architecture and engineering detail. *(Source is private — access, deep-dive o
 | **🔮 Tarotcunuz** | Astrology-grounded, citation-backed tarot engine | Swiss Ephemeris · FastAPI · Next.js |
 | **📋 Klinik Premium** | Offline-first clinical assessment & planning | Flutter · Riverpod |
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Fast, SEO-complete bilingual brand site | HTML5 · CSS3 · Vanilla JS |
+| **☁️ CepDepo** | Old Android phone → private home file server (LAN) | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
+| **🧾 e-Arşiv Fatura** | Desktop app that issues official e-invoices, no web portal | Electron · Node · electron-builder |
 | **🔬 RE & Instrumentation** | Runtime instrumentation + protocol/memory analysis of a hardened mobile client | Frida · mitmproxy · ADB · OpenCV |
 | **🕸️ Web Data Extraction** | Country-scale, anti-bot-resilient structured harvesting pipeline | Python · SQLite · stealth fetch |
 
@@ -169,6 +171,52 @@ brand presence for the SahaIQ product line. **[Live → droguzyuksel.com](https:
 </details>
 
 <details>
+<summary><b>☁️ CepDepo — Personal Cloud from an Old Android Phone</b></summary>
+
+<br/>
+
+Turns a spare, high-storage **Android** phone into a personal file server on the home Wi-Fi — the main
+phone offloads photos/videos, then browses, streams and restores from the depot. No subscription, no
+remote server, data never leaves the house. One codebase serves an **iOS + Android** client *and* the
+Android depot.
+
+**Engineering highlights**
+- **Contract-first**: every API change lands in `openapi.yaml` before code. A pure-Kotlin (JVM) server
+  core (`depot-core`) is platform-independent and JVM-tested — the phone is just a host.
+- **TLS by default** with self-signed certificate generation; 128-bit device pairing, hashed +
+  rotating tokens, per-device authorization.
+- **Crash-safe storage** — atomic `.tmp` + fsync + rename, upload dedup/reservation/TTL, a
+  self-repairing index + manifest, Live-Photo pairing, and a 30-day / quota trash.
+- Browser **`/web` page** exports a full or incremental backup to any PC on the LAN; Flutter client
+  (offload planner, pinning, transfer engine) over a documented REST v1.
+
+`Kotlin/JVM · NanoHTTPD + TLS · Flutter/Dart · REST (OpenAPI) · JVM integration tests`
+
+</details>
+
+<details>
+<summary><b>🧾 e-Arşiv Fatura — Desktop Invoicing App (Electron)</b></summary>
+
+<br/>
+
+A cross-platform **Electron** desktop app that issues official Turkish **e-Arşiv** invoices without
+ever opening the tax authority's web portal — log in with VKN/TCKN + portal password, fill the form,
+preview, sign. No third-party fee; runs entirely against the user's own portal account.
+
+**Engineering highlights**
+- Drives the portal's undocumented private API (via the `fatura` package): draft → **unsigned preview**
+  → `signDraftInvoice` to formalize → PDF / GİB download — no SMS in the standard flow, with the
+  SMS-OTP path kept as a fallback.
+- Clean **main / preload / renderer** split behind a locked-down preload bridge; credentials live in
+  the desktop session, never persisted server-side.
+- Packaged to distributables for both platforms (`electron-builder`: NSIS `.exe` on Windows, `.dmg`
+  on macOS).
+
+`Electron · Node ≥18 · electron-builder (NSIS + dmg) · fatura API`
+
+</details>
+
+<details>
 <summary><b>🔬 Reverse Engineering & Runtime Instrumentation</b></summary>
 
 <br/>
@@ -220,6 +268,7 @@ for reliability over raw volume.
 **Backend** — Python 3.12 · FastAPI · SQLAlchemy 2 (async) · Pydantic v2 · Alembic · ARQ/Redis
 **Frontend** — TypeScript (strict) · Next.js · React · Tailwind · Recharts · PWA
 **Mobile** — Flutter/Dart · React Native/Expo
+**Desktop / Native** — Electron · Node · Kotlin/JVM (NanoHTTPD + TLS) · self-signed PKI
 **Data** — PostgreSQL · pgvector · Redis
 **Quality** — pytest · Vitest · Playwright E2E · dependency-cruiser · CI gates
 **Security** — OAuth2 · Argon2id · TOTP · JWT · AES-256-GCM envelope encryption · audit logging · KVKK/GDPR
@@ -242,6 +291,8 @@ linkler yalnızca herkese açık olanlarda gösterilir.)*
 | **🔮 Tarotcunuz** | Astroloji-temelli, kaynak-dayanaklı tarot motoru | Swiss Ephemeris · FastAPI · Next.js |
 | **📋 Klinik Premium** | Çevrimdışı-öncelikli klinik değerlendirme & planlama | Flutter · Riverpod |
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Hızlı, SEO-tam, iki dilli marka sitesi | HTML5 · CSS3 · Saf JS |
+| **☁️ CepDepo** | Eski Android telefonu → ev ağında özel dosya sunucusu | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
+| **🧾 e-Arşiv Fatura** | Web portalına girmeden e-fatura kesen masaüstü uygulaması | Electron · Node · electron-builder |
 | **🔬 Tersine Müh. & Enstrümantasyon** | Korumalı bir mobil istemcide çalışma-anı enstrümantasyon + protokol/bellek analizi | Frida · mitmproxy · ADB · OpenCV |
 | **🕸️ Büyük Ölçekli Web Veri Çıkarımı** | Anti-bot korumalı kaynaklardan ülke ölçeğinde, kendini toparlayan toplama | Python · SQLite · stealth fetch |
 
@@ -250,7 +301,8 @@ yok); mekanik olarak dayatılan mimari sınırlar; envelope encryption (AES-256-
 sağlayıcı-izole entegrasyonlar; 180+ pytest, 136-senaryo Playwright, offline CI geçitleri; çöküşe
 dayanıklı, gözetimsiz operasyon; korumalı istemcilerde Frida ile çalışma-anı enstrümantasyon, ikili
 protokol ve bellek yapısı çözümleme, OCR/CV tabanlı durum makineleri; ülke ölçeğinde anti-bot
-dayanıklı, checkpoint'li ve kendini toparlayan veri toplama hatları.
+dayanıklı, checkpoint'li ve kendini toparlayan veri toplama hatları; sözleşme-önce (OpenAPI) API
+tasarımı, TLS'li Kotlin/JVM kişisel sunucu çekirdeği ve çapraz-platform masaüstü (Electron) dağıtımı.
 
 ---
 
