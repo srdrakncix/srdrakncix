@@ -18,6 +18,13 @@ correctness, explainability, and security by design.
 
 **[🇬🇧 English](#-selected-work) · [🇹🇷 Türkçe](#-seçili-projeler)**
 
+<br/>
+
+> 🔒 **Source is private (proprietary / commercial).** Source access, an architecture deep-dive,
+> or a live demo is **available on request** — for interviews or under NDA.
+> 🔒 **Kaynak özeldir (tescilli / ticari).** Talep üzerine kaynak erişimi, mimari derinlemesine
+> anlatım veya canlı demo **paylaşılabilir** — mülakat için ya da NDA kapsamında.
+
 </div>
 
 ---
@@ -25,7 +32,7 @@ correctness, explainability, and security by design.
 ## 🚀 Selected Work
 
 A cross-domain portfolio — health-tech, conversational AI, SaaS, and mobile. Expand any project for
-architecture and engineering detail. *(Application source is proprietary; live links shown where public.)*
+architecture and engineering detail. *(Source is private — access, deep-dive or demo on request.)*
 
 | Project | What it is | Stack |
 |---------|-----------|-------|
