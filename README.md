@@ -1,8 +1,8 @@
 <div align="center">
 
-# Full-Stack & Systems Engineer
+# AI Engineer & Full-Stack Builder
 
-**Health-tech · AI · Mobile · Web** — production systems built with a bias for
+**Production health-tech, voice-AI, SaaS & mobile — shipped end-to-end**, with a bias for
 correctness, explainability, and security by design.
 
 <!-- İSTERSEN başlığı gerçek adınla değiştir: "# Adın Soyadın" -->
