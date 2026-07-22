@@ -1,11 +1,11 @@
 <div align="center">
 
-# AI Engineer & Full-Stack Builder
+# Serdar
+
+### AI Engineer & Full-Stack Builder
 
 **Production health-tech, voice-AI, SaaS & mobile — shipped end-to-end**, with a bias for
 correctness, explainability, and security by design.
-
-<!-- İSTERSEN başlığı gerçek adınla değiştir: "# Adın Soyadın" -->
 
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
