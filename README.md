@@ -44,8 +44,8 @@ architecture and engineering detail. *(Source is private — access, deep-dive o
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Fast, SEO-complete bilingual brand site | HTML5 · CSS3 · Vanilla JS |
 | **☁️ CepDepo** | Phone-to-phone personal cloud — main phone offloads to an old Android over Wi-Fi | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
 | **🧾 e-Arşiv Fatura** | Desktop app that issues official e-invoices, no web portal | Electron · Node · electron-builder |
-| **🔬 RE & Instrumentation** | Runtime instrumentation + protocol/memory analysis of a hardened mobile client | Frida · mitmproxy · ADB · OpenCV |
-| **🕸️ Web Data Extraction** | Country-scale, anti-bot-resilient structured harvesting pipeline | Python · SQLite · stealth fetch |
+| **🔬 Reverse Engineering & Instrumentation** | Runtime instrumentation, protocol & memory analysis, vision-based automation | Frida · mitmproxy · ADB · OpenCV |
+| **🕸️ Large-Scale Data Extraction** | Resumable, country-scale structured data collection, scoring & export | Python · SQLite · PyInstaller |
 
 <br/>
 
@@ -221,19 +221,19 @@ preview, sign. No third-party fee; runs entirely against the user's own portal a
 
 <br/>
 
-Analyzing a hardened third-party mobile client at the **memory and protocol level**, then building a
-deterministic automation layer where no public API exists. Dynamic-analysis and instrumentation work
-— behavior is observed at runtime, not guessed at from static patches.
+Dynamic analysis and **runtime instrumentation** of a mobile application — understanding its behaviour
+by observing it live, then building a deterministic automation / interoperability layer where no
+public API is exposed. Behaviour is measured at runtime, not guessed from static code.
 
 **Engineering highlights**
-- Operates against a protected target (commercial anti-tamper **packer** + kernel-level anti-cheat)
-  via **Frida** runtime instrumentation and gadget injection — not binary patching.
-- Reconstructed the client's **binary wire protocol** through an intercepting proxy (**mitmproxy**)
-  and mapped **in-memory structures** to read live application state (reverse-engineered structs,
-  byte-exact request framing).
-- **Computer-vision state machine** — OpenCV + Tesseract **OCR** read on-screen state where no API is
-  exposed; **ADB**-driven device control closes the loop.
-- Clean, testable Python package (pytest · ruff), shipped as standalone binaries (PyInstaller).
+- **Runtime instrumentation** with **Frida** — hooking and tracing a running app to map its internal
+  data flows and undocumented APIs.
+- **Protocol reverse-engineering** — reconstructed the client's **binary wire protocol** through an
+  intercepting proxy (**mitmproxy**): byte-exact request/response framing.
+- **In-memory structure mapping** — read live application state by mapping runtime data structures.
+- **Vision-based automation** — OpenCV + Tesseract **OCR** read on-screen state where no API exists;
+  **ADB**-driven device control closes the loop into a reliable automation pipeline.
+- Clean, tested Python package (pytest · ruff), shipped as standalone binaries (PyInstaller).
 
 `Python 3.11 · Frida · mitmproxy · adbutils (ADB) · OpenCV · Tesseract OCR · PyInstaller`
 
@@ -244,22 +244,23 @@ deterministic automation layer where no public API exists. Dynamic-analysis and 
 
 <br/>
 
-A resumable, **country-scale** harvesting pipeline that pulls structured records from
-**anti-bot-protected** public web sources and turns weak signals into a ranked shortlist — engineered
-for reliability over raw volume.
+A resumable, **country-scale** data pipeline that collects, enriches, scores and exports structured
+records from public web sources — engineered for **reliability and correctness at volume** rather
+than raw speed.
 
 **Engineering highlights**
-- National-scale crawl matrix (**81 provinces** → district-level queries) driven by an
-  **orchestrator + watchdog** with per-query checkpoints and progress files — fully resumable after
-  any crash.
-- **Anti-bot-resilient** fetching (stealth session layer, human-like pacing); **SQLite**-backed dedup
-  so re-runs never double-count.
-- Heuristic **signal scoring** (0–100) that converts weak, indirect indicators into a ranked shortlist
+- **National-scale crawl orchestration** — an **orchestrator + watchdog** covering **81 provinces**
+  down to district-level queries, with per-query checkpoints and progress files: fully **resumable**
+  after any crash.
+- **Fault-tolerant fetching** — retry/backoff, rate-aware scheduling and session management for
+  stable, long-running collection.
+- **SQLite-backed deduplication** — re-runs never double-count.
+- Heuristic **signal scoring** (0–100) that turns weak, indirect indicators into a ranked shortlist
   rather than a raw dump.
-- Normalized pipeline — fetch → detail-enrich → score → export (**CSV / XLSX**) — compiled to a
-  standalone CLI (`.exe`).
+- Normalized pipeline — fetch → enrich → score → export (**CSV / XLSX**) — compiled to a standalone
+  CLI (`.exe`).
 
-`Python · anti-bot fetch layer · SQLite · heuristic scoring · PyInstaller`
+`Python · async fetch · SQLite · heuristic scoring · PyInstaller`
 
 </details>
 
@@ -272,7 +273,7 @@ for reliability over raw volume.
 **Data** — PostgreSQL · pgvector · Redis
 **Quality** — pytest · Vitest · Playwright E2E · dependency-cruiser · CI gates
 **Security** — OAuth2 · Argon2id · TOTP · JWT · AES-256-GCM envelope encryption · audit logging · KVKK/GDPR
-**Systems / RE** — Frida · mitmproxy · ADB/adbutils · OpenCV · Tesseract OCR · binary protocol & memory analysis · large-scale scraping
+**Systems / RE** — Frida · mitmproxy · ADB/adbutils · OpenCV · Tesseract OCR · binary protocol & memory analysis · large-scale data pipelines
 **Practices** — explainable systems · literature-grounded thresholds · provider-isolated integrations · resilient ops
 
 ---
@@ -293,15 +294,15 @@ linkler yalnızca herkese açık olanlarda gösterilir.)*
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Hızlı, SEO-tam, iki dilli marka sitesi | HTML5 · CSS3 · Saf JS |
 | **☁️ CepDepo** | Telefondan telefona kişisel bulut — ana telefon eski Android'e Wi-Fi'dan boşaltır | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
 | **🧾 e-Arşiv Fatura** | Web portalına girmeden e-fatura kesen masaüstü uygulaması | Electron · Node · electron-builder |
-| **🔬 Tersine Müh. & Enstrümantasyon** | Korumalı bir mobil istemcide çalışma-anı enstrümantasyon + protokol/bellek analizi | Frida · mitmproxy · ADB · OpenCV |
-| **🕸️ Büyük Ölçekli Web Veri Çıkarımı** | Anti-bot korumalı kaynaklardan ülke ölçeğinde, kendini toparlayan toplama | Python · SQLite · stealth fetch |
+| **🔬 Tersine Mühendislik & Enstrümantasyon** | Çalışma-anı enstrümantasyon, protokol & bellek analizi, görü-tabanlı otomasyon | Frida · mitmproxy · ADB · OpenCV |
+| **🕸️ Büyük Ölçekli Veri Çıkarımı** | Kendini toparlayan, ülke ölçekli yapılandırılmış veri toplama, skorlama & dışa aktarım | Python · SQLite · PyInstaller |
 
 **Öne çıkan mühendislik** — açıklanabilir klinik skorlar; literatür-temelli eşikler (keyfi değer
 yok); mekanik olarak dayatılan mimari sınırlar; envelope encryption (AES-256-GCM) + denetim kaydı;
 sağlayıcı-izole entegrasyonlar; 180+ pytest, 136-senaryo Playwright, offline CI geçitleri; çöküşe
-dayanıklı, gözetimsiz operasyon; korumalı istemcilerde Frida ile çalışma-anı enstrümantasyon, ikili
-protokol ve bellek yapısı çözümleme, OCR/CV tabanlı durum makineleri; ülke ölçeğinde anti-bot
-dayanıklı, checkpoint'li ve kendini toparlayan veri toplama hatları; sözleşme-önce (OpenAPI) API
+dayanıklı, gözetimsiz operasyon; Frida ile çalışma-anı enstrümantasyon, ikili protokol ve bellek
+yapısı çözümleme, OCR/CV tabanlı otomasyon; ülke ölçeğinde checkpoint'li, kendini toparlayan, hataya
+dayanıklı veri toplama & işleme hatları; sözleşme-önce (OpenAPI) API
 tasarımı, TLS'li Kotlin/JVM kişisel sunucu çekirdeği ve çapraz-platform masaüstü (Electron) dağıtımı.
 
 ---
