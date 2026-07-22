@@ -35,6 +35,8 @@ architecture and engineering detail. *(Application source is proprietary; live l
 | **🔮 Tarotcunuz** | Astrology-grounded, citation-backed tarot engine | Swiss Ephemeris · FastAPI · Next.js |
 | **📋 Klinik Premium** | Offline-first clinical assessment & planning | Flutter · Riverpod |
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Fast, SEO-complete bilingual brand site | HTML5 · CSS3 · Vanilla JS |
+| **🔬 RE & Instrumentation** | Runtime instrumentation + protocol/memory analysis of a hardened mobile client | Frida · mitmproxy · ADB · OpenCV |
+| **🕸️ Web Data Extraction** | Country-scale, anti-bot-resilient structured harvesting pipeline | Python · SQLite · stealth fetch |
 
 <br/>
 
@@ -159,6 +161,53 @@ brand presence for the SahaIQ product line. **[Live → droguzyuksel.com](https:
 
 </details>
 
+<details>
+<summary><b>🔬 Reverse Engineering & Runtime Instrumentation</b></summary>
+
+<br/>
+
+Analyzing a hardened third-party mobile client at the **memory and protocol level**, then building a
+deterministic automation layer where no public API exists. Dynamic-analysis and instrumentation work
+— behavior is observed at runtime, not guessed at from static patches.
+
+**Engineering highlights**
+- Operates against a protected target (commercial anti-tamper **packer** + kernel-level anti-cheat)
+  via **Frida** runtime instrumentation and gadget injection — not binary patching.
+- Reconstructed the client's **binary wire protocol** through an intercepting proxy (**mitmproxy**)
+  and mapped **in-memory structures** to read live application state (reverse-engineered structs,
+  byte-exact request framing).
+- **Computer-vision state machine** — OpenCV + Tesseract **OCR** read on-screen state where no API is
+  exposed; **ADB**-driven device control closes the loop.
+- Clean, testable Python package (pytest · ruff), shipped as standalone binaries (PyInstaller).
+
+`Python 3.11 · Frida · mitmproxy · adbutils (ADB) · OpenCV · Tesseract OCR · PyInstaller`
+
+</details>
+
+<details>
+<summary><b>🕸️ Large-Scale Web Data Extraction</b></summary>
+
+<br/>
+
+A resumable, **country-scale** harvesting pipeline that pulls structured records from
+**anti-bot-protected** public web sources and turns weak signals into a ranked shortlist — engineered
+for reliability over raw volume.
+
+**Engineering highlights**
+- National-scale crawl matrix (**81 provinces** → district-level queries) driven by an
+  **orchestrator + watchdog** with per-query checkpoints and progress files — fully resumable after
+  any crash.
+- **Anti-bot-resilient** fetching (stealth session layer, human-like pacing); **SQLite**-backed dedup
+  so re-runs never double-count.
+- Heuristic **signal scoring** (0–100) that converts weak, indirect indicators into a ranked shortlist
+  rather than a raw dump.
+- Normalized pipeline — fetch → detail-enrich → score → export (**CSV / XLSX**) — compiled to a
+  standalone CLI (`.exe`).
+
+`Python · anti-bot fetch layer · SQLite · heuristic scoring · PyInstaller`
+
+</details>
+
 ## 🛠️ What I work with
 
 **Backend** — Python 3.12 · FastAPI · SQLAlchemy 2 (async) · Pydantic v2 · Alembic · ARQ/Redis
@@ -167,6 +216,7 @@ brand presence for the SahaIQ product line. **[Live → droguzyuksel.com](https:
 **Data** — PostgreSQL · pgvector · Redis
 **Quality** — pytest · Vitest · Playwright E2E · dependency-cruiser · CI gates
 **Security** — OAuth2 · Argon2id · TOTP · JWT · AES-256-GCM envelope encryption · audit logging · KVKK/GDPR
+**Systems / RE** — Frida · mitmproxy · ADB/adbutils · OpenCV · Tesseract OCR · binary protocol & memory analysis · large-scale scraping
 **Practices** — explainable systems · literature-grounded thresholds · provider-isolated integrations · resilient ops
 
 ---
@@ -185,11 +235,15 @@ linkler yalnızca herkese açık olanlarda gösterilir.)*
 | **🔮 Tarotcunuz** | Astroloji-temelli, kaynak-dayanaklı tarot motoru | Swiss Ephemeris · FastAPI · Next.js |
 | **📋 Klinik Premium** | Çevrimdışı-öncelikli klinik değerlendirme & planlama | Flutter · Riverpod |
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Hızlı, SEO-tam, iki dilli marka sitesi | HTML5 · CSS3 · Saf JS |
+| **🔬 Tersine Müh. & Enstrümantasyon** | Korumalı bir mobil istemcide çalışma-anı enstrümantasyon + protokol/bellek analizi | Frida · mitmproxy · ADB · OpenCV |
+| **🕸️ Büyük Ölçekli Web Veri Çıkarımı** | Anti-bot korumalı kaynaklardan ülke ölçeğinde, kendini toparlayan toplama | Python · SQLite · stealth fetch |
 
 **Öne çıkan mühendislik** — açıklanabilir klinik skorlar; literatür-temelli eşikler (keyfi değer
 yok); mekanik olarak dayatılan mimari sınırlar; envelope encryption (AES-256-GCM) + denetim kaydı;
 sağlayıcı-izole entegrasyonlar; 180+ pytest, 136-senaryo Playwright, offline CI geçitleri; çöküşe
-dayanıklı, gözetimsiz operasyon.
+dayanıklı, gözetimsiz operasyon; korumalı istemcilerde Frida ile çalışma-anı enstrümantasyon, ikili
+protokol ve bellek yapısı çözümleme, OCR/CV tabanlı durum makineleri; ülke ölçeğinde anti-bot
+dayanıklı, checkpoint'li ve kendini toparlayan veri toplama hatları.
 
 ---
 
