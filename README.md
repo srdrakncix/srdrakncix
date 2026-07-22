@@ -42,7 +42,7 @@ architecture and engineering detail. *(Source is private — access, deep-dive o
 | **🔮 Tarotcunuz** | Astrology-grounded, citation-backed tarot engine | Swiss Ephemeris · FastAPI · Next.js |
 | **📋 Klinik Premium** | Offline-first clinical assessment & planning | Flutter · Riverpod |
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Fast, SEO-complete bilingual brand site | HTML5 · CSS3 · Vanilla JS |
-| **☁️ CepDepo** | Old Android phone → private home file server (LAN) | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
+| **☁️ CepDepo** | Phone-to-phone personal cloud — main phone offloads to an old Android over Wi-Fi | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
 | **🧾 e-Arşiv Fatura** | Desktop app that issues official e-invoices, no web portal | Electron · Node · electron-builder |
 | **🔬 RE & Instrumentation** | Runtime instrumentation + protocol/memory analysis of a hardened mobile client | Frida · mitmproxy · ADB · OpenCV |
 | **🕸️ Web Data Extraction** | Country-scale, anti-bot-resilient structured harvesting pipeline | Python · SQLite · stealth fetch |
@@ -291,7 +291,7 @@ linkler yalnızca herkese açık olanlarda gösterilir.)*
 | **🔮 Tarotcunuz** | Astroloji-temelli, kaynak-dayanaklı tarot motoru | Swiss Ephemeris · FastAPI · Next.js |
 | **📋 Klinik Premium** | Çevrimdışı-öncelikli klinik değerlendirme & planlama | Flutter · Riverpod |
 | **🌐 [droguzyuksel.com](https://droguzyuksel.com)** | Hızlı, SEO-tam, iki dilli marka sitesi | HTML5 · CSS3 · Saf JS |
-| **☁️ CepDepo** | Eski Android telefonu → ev ağında özel dosya sunucusu | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
+| **☁️ CepDepo** | Telefondan telefona kişisel bulut — ana telefon eski Android'e Wi-Fi'dan boşaltır | Kotlin/JVM · NanoHTTPD+TLS · Flutter |
 | **🧾 e-Arşiv Fatura** | Web portalına girmeden e-fatura kesen masaüstü uygulaması | Electron · Node · electron-builder |
 | **🔬 Tersine Müh. & Enstrümantasyon** | Korumalı bir mobil istemcide çalışma-anı enstrümantasyon + protokol/bellek analizi | Frida · mitmproxy · ADB · OpenCV |
 | **🕸️ Büyük Ölçekli Web Veri Çıkarımı** | Anti-bot korumalı kaynaklardan ülke ölçeğinde, kendini toparlayan toplama | Python · SQLite · stealth fetch |
